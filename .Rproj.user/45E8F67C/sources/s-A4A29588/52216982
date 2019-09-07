@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1567797439072.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1340839393",
+    "id" : "52216982",
+    "lastKnownWriteTime" : 1567893907,
+    "last_content_update" : 1567893907428,
+    "path" : "~/Documents/PRESENTATIONS/GBI_DAY/Titanic/Titanic_Main.R",
+    "project_path" : "Titanic_Main.R",
+    "properties" : {
+        "cursorPosition" : "68,0",
+        "scrollLine" : "46",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

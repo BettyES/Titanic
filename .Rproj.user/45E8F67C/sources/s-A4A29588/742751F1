@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1567891982826.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2186482161",
+    "id" : "742751F1",
+    "lastKnownWriteTime" : 1567895085,
+    "last_content_update" : 1567895085349,
+    "path" : "~/Documents/PRESENTATIONS/GBI_DAY/Titanic/app.R",
+    "project_path" : "app.R",
+    "properties" : {
+        "cursorPosition" : "30,71",
+        "scrollLine" : "16",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

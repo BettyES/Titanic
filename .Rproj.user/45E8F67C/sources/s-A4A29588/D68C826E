@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1567797407753.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1406342554",
+    "id" : "D68C826E",
+    "lastKnownWriteTime" : 1567890782,
+    "last_content_update" : 1567890782553,
+    "path" : "~/Documents/PRESENTATIONS/GBI_DAY/Titanic/Titanic_Functions.R",
+    "project_path" : "Titanic_Functions.R",
+    "properties" : {
+        "cursorPosition" : "23,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
