@@ -10,39 +10,50 @@ data <- read.csv("../Data/interim/titanic.csv",colClasses = c('integer','factor'
 test_data <- read.csv("../Data/interim/titanic_test.csv",colClasses = c('character','integer','factor','factor','factor',
                                                               'double','integer','integer'))
 
-ui <- fluidPage(
-  h1("TITANIC: Would you have survived?"),br(),
+ui <- navbarPage("Titanic",
+  tabPanel("Who survived?",
+  fluidRow(
+    column(3,
+           img(src = b64,height="100%", width="100%", align="left")),
+    column(9,
+           h1("TITANIC: Would you have survived?"),
+           br(),
+           actionButton("do", "Click Me"),
+           br(),
+           verbatimTextOutput("result")
+    )
+  ),
     fluidRow(
-          column(4,
+          column(6,
               wellPanel(
-                  textInput("name", label = h4("Please enter your name"), 
+                  textInput("name", label = h6("Please enter your name"), 
                             value = "name"),
-                  textInput("age", label = h4("Please enter your age"), 
+                  textInput("age", label = h6("Please enter your age"), 
                             value = "15"),
-                  selectInput("gender", label = h4("Your gender"), 
+                  selectInput("gender", label = h6("Your gender"), 
                               choices = list("female" = "female", "male" = "male"), selected = "female"),
-                  selectInput("port", label = h4("Select your Departure harbour"), 
+                  selectInput("port", label = h6("Select your Departure harbour"), 
                               choices = list("Southhampton, UK" = "S", "Cherbourg, France" = "C",
-                                             "Cobh, Ireland" = "Q"), selected = "S"),
-                  selectInput("class", label = h4("Which class would you like to travel in:"), 
+                                             "Cobh, Ireland" = "Q"), selected = "S"))),
+          column(6,
+                 wellPanel(        
+                  selectInput("class", label = h6("Which class would you like to travel in:"), 
                               choices = list("1st" = 1, "2nd" = 2,
                                              "3rd" = 3), selected = 1),
-                  sliderInput("fare", label = h4("How much would you be willing to spend on a ticket?"), min = 0, max = 130, 
+                  sliderInput("fare", label = h6("How much would you be willing to spend on a ticket?"), min = 0, max = 130, 
                               value = 15),
-                  textInput("sibs", label = h4("Any siblings/spouse travelling with you? How many:"), 
+                  textInput("sibs", label = h6("Any siblings/spouse travelling with you? How many:"), 
                             value = "0"),
-                  textInput("parch", label = h4("Any children/parents travelling with you? How many:"), 
+                  textInput("parch", label = h6("Any children/parents travelling with you? How many:"), 
                             value = "0")
                          )
-                  ),
-          column(6,
-                 actionButton("do", "Click Me"),
-                 br(),
-                 img(src = b64,height="50%", width="50%", align="right"), 
-                 br(),
-                 verbatimTextOutput("result")
-                         )
-    )
+                  ))),
+  tabPanel("Data Exploration",
+    plotOutput("agePlot"),
+    plotOutput("classPlot"),
+    plotOutput("sexPlot"),
+    plotOutput("embPlot")    
+  )
 )
 
 
@@ -69,7 +80,27 @@ server <- function(input, output) {
     }
   })
   
+  ######### PLOTS #############
   
+  output$agePlot = renderPlot({
+    ggplot(titanic_train)+
+      geom_histogram(aes(Age,fill=Survived),color = "white",position="dodge")+facet_wrap(~Sex)
+    })
+
+output$classPlot = renderPlot({  
+  ggplot(titanic_train)+
+    geom_histogram(aes(Pclass,fill=Survived),color = "white",stat="count",position="dodge")
+})
+
+output$sexPlot = renderPlot({  
+  ggplot(titanic_train)+
+    geom_histogram(aes(Sex,fill=Survived),color = "white",stat="count",position="dodge")
+})
+
+output$embPlot = renderPlot({ 
+  ggplot(titanic_train)+
+    geom_histogram(aes(Embarked,fill=Survived),color = "white",stat="count",position="dodge")
+})
   
 }
 
