@@ -1,6 +1,7 @@
 library(tidyverse)
 library(data.table)
 library(reshape2)
+source("Titanic_Functions.R")
 
 titanic_train = read_csv("../Data/raw/train.csv")
 titanic_test = read_csv("../Data/raw/test.csv")
@@ -14,6 +15,10 @@ titanic_train = transform_columns(titanic_train)
 titanic_test = replace_NAs(titanic_test)
 
 titanic_test = transform_columns(titanic_test)
+titanic_test = subset(titanic_test,select=c(Name, Age, Sex, Embarked, Pclass, Fare, SibSp, Parch))
+
+write_csv(titanic_train, "../Data/interim/titanic.csv")
+write_csv(titanic_test, "../Data/interim/titanic_test.csv")
 
 #data exploration
 
