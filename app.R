@@ -67,17 +67,14 @@ ui <- navbarPage("Titanic",
 
 
 server <- function(input, output) {
-  test = reactive({
+  
+  runPrediction <- eventReactive(input$do, {
     df = data.frame("Name" = as.character(input$name),"Age" = as.integer(input$age), "Sex" = as.factor(input$gender), "Embarked" = as.factor(input$port), 
                     "Pclass" = as.factor(input$class),
                     "Fare" = as.double(input$fare), "SibSp" = as.integer(input$sibs), "Parch" = as.integer(input$parch))
     df = c(test_data,df)
-  df
-  })
-  
-  runPrediction <- eventReactive(input$do, {
     model<-ctree(Survived ~ Pclass+Sex+Age+Embarked+Fare+SibSp+Parch,data=data)
-    pred<-predict(model,test())
+    pred<-predict(model,df)
     pred
   })
   
