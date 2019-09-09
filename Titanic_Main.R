@@ -37,9 +37,9 @@ pred<-predict(model,titanic_test)
 mP = mean(pred,na.rm = TRUE)
 pred = ifelse(pred>=mP,1,0)
 
-gendercl$pred = pred
+gendercl<-read.csv("../Data/raw/gender_submission.csv")
+gendercl$pred = as.numeric(pred)
 gendercl = na.omit(gendercl)
-
 cor(gendercl$pred,gendercl$Survived)
 
 #regression tree
