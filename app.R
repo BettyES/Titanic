@@ -72,6 +72,7 @@ server <- function(input, output) {
     df = data.frame("Name" = as.character(input$name),"Age" = as.integer(input$age), "Sex" = as.factor(input$gender), "Embarked" = as.factor(input$port), 
                     "Pclass" = as.factor(input$class),
                     "Fare" = as.double(input$fare), "SibSp" = as.integer(input$sibs), "Parch" = as.integer(input$parch))
+    print(df)
     df = c(test_data,df)
     model<-ctree(Survived ~ Pclass+Sex+Age+Embarked+Fare+SibSp+Parch,data=data)
     pred<-predict(model,df)
@@ -79,7 +80,8 @@ server <- function(input, output) {
   })
   
   output$result <- renderPrint({
-    if(as.numeric(tail(runPrediction(),1)) == 1){
+    print(as.numeric(tail(runPrediction(),1)))
+    if(as.numeric(tail(runPrediction(),1))-1 == 1){
       cat("Congratulations!\nYou would have survived the disaster.")
     }else{
       cat("Sorry!\nYou would have not survived.")
@@ -89,24 +91,24 @@ server <- function(input, output) {
   ######### PLOTS #############
   
   output$agePlot = renderPlot({
-    ggplot(titanic_train)+
+    ggplot(data)+
       geom_histogram(aes(Age,fill=Survived),color = "white",position="dodge")+facet_wrap(~Sex)
     })
 
 output$classPlot = renderPlot({  
-  ggplot(titanic_train)+
+  ggplot(data)+
     geom_histogram(aes(Pclass,fill=Survived),color = "white",stat="count",position="dodge")+
     xlab("Class")
 })
 
 output$sexPlot = renderPlot({  
-  ggplot(titanic_train)+
+  ggplot(data)+
     geom_histogram(aes(Sex,fill=Survived),color = "white",stat="count",position="dodge")+
     xlab("Gender")
 })
 
 output$embPlot = renderPlot({ 
-  ggplot(titanic_train)+
+  ggplot(data)+
     geom_histogram(aes(Embarked,fill=Survived),color = "white",stat="count",position="dodge")+
     xlab("Harbour")+theme(axis.text.x = element_text(angle = 45, hjust = 1))+
     scale_x_discrete(breaks=c("Q","S","C"),
