@@ -49,10 +49,14 @@ ui <- navbarPage("Titanic",
                          )
                   ))),
   tabPanel("Data Exploration",
-    plotOutput("agePlot"),
-    plotOutput("classPlot"),
-    plotOutput("sexPlot"),
-    plotOutput("embPlot")    
+           fluidRow(column(8,
+                            plotOutput("agePlot")),
+                    column(4,
+                            plotOutput("classPlot"))),
+           fluidRow(column(4,
+                            plotOutput("sexPlot")),
+                    column(4,
+                            plotOutput("embPlot")))    
   )
 )
 
