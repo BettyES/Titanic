@@ -50,12 +50,17 @@ ui <- navbarPage("Titanic",
                   ))),
   tabPanel("Data Exploration",
            fluidRow(column(8,
+                           h5("Does age have something to do with death or survival? And is there a difference between genders?"),
                             plotOutput("agePlot")),
                     column(4,
+                           h5("Travelling first class, it would be easier to get to deck. 
+                              Could this have had influenced your chances of survival?"),
                             plotOutput("classPlot"))),
-           fluidRow(column(4,
+           fluidRow(column(6,
+                           h5("As mentioned above, do we see any survival differences between men and women?"),
                             plotOutput("sexPlot")),
-                    column(4,
+                    column(6,
+                           h5("And what about the harbour from which passengers embarked?"),
                             plotOutput("embPlot")))    
   )
 )
@@ -93,17 +98,22 @@ server <- function(input, output) {
 
 output$classPlot = renderPlot({  
   ggplot(titanic_train)+
-    geom_histogram(aes(Pclass,fill=Survived),color = "white",stat="count",position="dodge")
+    geom_histogram(aes(Pclass,fill=Survived),color = "white",stat="count",position="dodge")+
+    xlab("Class")
 })
 
 output$sexPlot = renderPlot({  
   ggplot(titanic_train)+
-    geom_histogram(aes(Sex,fill=Survived),color = "white",stat="count",position="dodge")
+    geom_histogram(aes(Sex,fill=Survived),color = "white",stat="count",position="dodge")+
+    xlab("Gender")
 })
 
 output$embPlot = renderPlot({ 
   ggplot(titanic_train)+
-    geom_histogram(aes(Embarked,fill=Survived),color = "white",stat="count",position="dodge")
+    geom_histogram(aes(Embarked,fill=Survived),color = "white",stat="count",position="dodge")+
+    xlab("Harbour")+theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+    scale_x_discrete(breaks=c("Q","S","C"),
+                     labels=c("Queenstown", "Southhampton", "Cherbourg"))
 })
   
 }
